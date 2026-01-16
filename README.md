@@ -138,3 +138,97 @@ F1 = 2 × (0.888 × 0.919) / (0.888 + 0.919) ≈ 0.903
 - **Precision** → When we predict <=50K, how often are we correct?
 - **Recall** → How many of all the actual <=50K users did we catch?. In our case, this is a key metric. A low recall means the model is missing potential customers who we want to offer loans to, which could lead to lost opportunities.
 - **F1 Score** → Combined measure of precision and recall
+
+### Task 2: ROC, AUC
+
+## Understanding ROC and AUC (My Learning Notes)
+
+While training my first classification model using **AWS SageMaker and XGBoost**, I came across two evaluation metrics called **ROC** and **AUC**. At first, these terms felt confusing, so this section captures how I currently understand them as someone learning AI concepts step by step.
+
+My model predicts the **`income`** column, where:
+- **<= 50K** is treated as the *positive class*
+- **> 50K** is treated as the *negative class*
+
+---
+
+## What is ROC?
+
+ROC stands for **Receiver Operating Characteristic**.  
+Even though the name sounds complex, the idea behind it is simple.
+
+ROC helps answer this question:
+> *How well does the model separate people who earn <= 50K from those who earn > 50K?*
+
+The ROC curve is a graph that shows the relationship between:
+- **True Positive Rate (Recall)**  
+  → Out of all people who actually earn **<= 50K**, how many did the model correctly predict?
+- **False Positive Rate**  
+  → Out of all people who earn **> 50K**, how many were incorrectly predicted as **<= 50K**?
+
+Instead of checking just one prediction threshold, SageMaker evaluates the model at **many different thresholds**, and each one becomes a point on the ROC curve.
+
+A better model:
+- Catches more true <=50K cases
+- Makes fewer incorrect predictions for >50K cases
+
+---
+
+## What is AUC?
+
+AUC stands for **Area Under the Curve**.
+
+Rather than looking at the entire ROC graph, AUC gives us **one number** that summarizes how good the model is at separating the two income groups.
+
+This is how I think about it:
+> *If I randomly pick one person who earns <=50K and one person who earns >50K, AUC tells me how often the model correctly ranks the <=50K person as more likely.*
+
+### How to interpret AUC
+
+| AUC Value | What it means |
+|-----------|---------------|
+| 1.0 | Perfect model |
+| 0.9+ | Very strong separation |
+| ~0.7 | Decent |
+| 0.5 | Random guessing |
+
+So when I see a **high AUC in the SageMaker XGBoost report**, it tells me that the model has learned useful patterns from the data — even if I change the prediction threshold.
+
+---
+
+## Why ROC and AUC Matter to Me
+
+Accuracy alone doesn't tell the full story, especially when the data is imbalanced.
+
+ROC and AUC help me understand:
+- Whether the model is actually learning meaningful patterns
+- How well it separates income groups overall
+- How the model might behave if business requirements change later
+
+As someone learning AI from a cloud engineering background, this helped me trust the model more than accuracy alone.
+
+---
+
+## My Key Takeaway
+
+- **ROC** shows how the model performs across many thresholds
+- **AUC** summarizes the model's ability to separate classes
+- High AUC in SageMaker's XGBoost report = a healthy model
+
+This section reflects my current understanding as I continue learning machine learning concepts hands-on using AWS.
+
+![ROC AUC Curve](ViajyROCAUC.png)
+
+## ROC, AUC Analysis
+
+Above ROC curve shows how well my model can tell the difference between people who earn <=50K and those who earn >50K.
+
+The curve goes up quickly and stays close to the top-left corner, which is a good sign. It means the model is able to correctly identify most <=50K users while making only a small number of mistakes on >50K users.
+
+The AUC value is about 0.92, which tells me that the model is doing a very good job overall. In simple terms, when the model compares one person earning <=50K and one earning >50K, it correctly ranks the <=50K person higher most of the time.
+
+
+# Summary
+
+This repository focuses on evaluating a machine learning model trained using AWS SageMaker and XGBoost. As part of my AI learning journey, I explore how to interpret key evaluation metrics such as the confusion matrix, ROC curve, and AUC while predicting the income column (<=50K vs >50K).
+
+The goal of this repo is to build a practical understanding of model performance, trade-offs between metrics, and how SageMaker helps assess model quality in real-world scenarios.
