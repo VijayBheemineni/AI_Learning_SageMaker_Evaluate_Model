@@ -58,6 +58,8 @@ In our case, the model is trying to identify people with income ≤ 50K, so:
 
 #### Analysis of XGBoost Report Confusion Matrix
 
+![Confusion Matrix](VijayXGBoostConfusionMatrix.png)
+
 | True / Predicted | Predicted >50K (0) | Predicted <=50K (1) |
 |------------------|-------------------|---------------------|
 | Actual >50K (0)  | 419               | 202                 |
