@@ -1,2 +1,3 @@
 # AI_Learning_SageMaker_Evaluate_Model
-This repo contains details about Model we trained
+
+This repository focuses on analyzing and understanding the XGBoost training report generated after training a machine learning model using Amazon SageMaker. The notebooks in this repo explore key training metrics, model performance indicators, and validation results produced by XGBoost. The goal is to build a clear understanding of how the model behaved during training, what the metrics mean, and how to interpret them in a practical, real-world context. This work is part of my broader learning journey into AWS AI and machine learning, with a strong emphasis on model evaluation, observability, and production readiness, rather than just training a model and moving on.
