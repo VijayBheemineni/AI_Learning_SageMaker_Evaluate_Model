@@ -216,7 +216,7 @@ As someone learning AI from a cloud engineering background, this helped me trust
 
 This section reflects my current understanding as I continue learning machine learning concepts hands-on using AWS.
 
-![ROC AUC Curve](ViajyROCAUC.png)
+![ROC AUC Curve](images/VijayROCAUC.png)
 
 ## ROC, AUC Analysis
 
